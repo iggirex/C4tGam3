@@ -18,7 +18,9 @@ Game.Preloader.prototype = {
 
     //load assets
 
-    this.load.tilemap("map", "assets/level1.csv")
+    this.load.tilemap("map", "assets/catSpace.csv")
+
+    this.load.image("background", "assets/space-05.jpg")
 
     this.load.image("tileset", "assets/exampleTiles.png")
 
