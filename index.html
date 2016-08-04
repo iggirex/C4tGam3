@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>C4t G4M3</title>
+
+    <script src = "phaser.js"></script>
+    <script src = "Boot.js"></script>
+
+    <script src = "Preloader.js"></script>
+    <script src = "MainMenu.js"></script>
+    <script src = "Level1.js"></script>
+
+
+
+  </head>
+  <body>
+
+      <script type="text/javascript">
+        window.onload = function() {
+
+          var game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.CANVAS, "")
+
+          game.state.add("Boot", Game.Boot)
+          game.state.add("Preloader", Game.Preloader)
+          // game.state.add("MainMenu", Game.MainMenu)
+          game.state.add("Level1", Game.Level1)
+
+          // game.physics.startSystem(Phaser.Physics.ARCADE);
+          // game.world.enableBody = true;
+
+          game.state.start("Boot")
+
+
+        }
+        </script>
+
+  </body>
+</html>
