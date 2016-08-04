@@ -11,9 +11,9 @@ var jumpTimer = 0
 
 Game.Level1.prototype = {
   create: function() {
-    // this.stage.backgroundColor = "#00ffff"
+    this.stage.backgroundColor = "#00ffff"
 
-    this.background = this.game.add.tileSprite( 0, 0, this.game.width, this.game.height, "background")
+    this.background = this.game.add.tileSprite( 0, 0, 10240, 10240, "background")
 
     //  this.physics.arcade.gravity.y = 1400
 

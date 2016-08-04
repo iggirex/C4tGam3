@@ -20,11 +20,11 @@ Game.Preloader.prototype = {
 
     this.load.tilemap("map", "assets/catSpace.csv")
 
-    this.load.image("background", "assets/space-05.jpg")
+    this.load.image("background", "assets/space-08.jpg")
 
     this.load.image("tileset", "assets/exampleTiles.png")
 
-    this.load.spritesheet("player", "assets/player.png",24,26)
+    this.load.spritesheet("player", "assets/nyanCatty.png", 142 ,87)
 
 
   },
