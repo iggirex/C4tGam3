@@ -5,17 +5,27 @@ var layer
 
 var player
 var controls = {}
-var playerSpeed = 150
+var playerSpeed = 50
+var jumpTimer = 0
 
 
 Game.Level1.prototype = {
   create: function() {
     this.stage.backgroundColor = "#00ffff"
 
-    map = this.add.tilemap("map")
+    //  this.physics.arcade.gravity.y = 1400
+
+    //  this.world.enableBody = true
+
+    map = this.add.tilemap("map", 64, 64)
+
     map.addTilesetImage("tileset")
+
     layer = map.createLayer(0)
+
     layer.resizeWorld()
+
+    map.setCollisionBetween(0,0)
 
     player = this.add.sprite(100, 550, "player")
     player.anchor.setTo(0.5, 0.5)
@@ -36,20 +46,19 @@ Game.Level1.prototype = {
       left: this.input.keyboard.addKey(Phaser.Keyboard.A),
       up: this.input.keyboard.addKey(Phaser.Keyboard.W),
       down: this.input.keyboard.addKey(Phaser.Keyboard.S)
-
     }
-
-
   },
 
   update: function() {
 
 
-    var speed = 250
+    // var speed = 250
     // this.player.body.velocity.y = 0
     // this.player.body.velocity.x = 0
 
     this.physics.arcade.collide(player,layer)
+
+    // player.body.velocity.x = 0
 
     if(controls.up.isDown) {
       player.animations.play("jump")
@@ -68,6 +77,11 @@ Game.Level1.prototype = {
       player.body.velocity.x -= playerSpeed
     }
 
+    // if(controls.up.isDown && (player.body.onFloor() || player.body.touching.down) && this.time.now > jumpTimer) {
+    //   player.body.velocity.y = -600
+    //   jumpTimer = this.time.now + 750
+    // }
+    //
     if(controls.down.isDown) {
       player.animations.play("jump")
       player.body.velocity.y += playerSpeed
