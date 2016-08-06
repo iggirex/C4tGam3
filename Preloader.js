@@ -34,6 +34,9 @@ Game.Preloader.prototype = {
 
     this.load.spritesheet("Margarita", "assets/enemyMargarita.png")
 
+    this.load.image("bullets", "assets/weezyBullet.png")
+
+
 
 
   },

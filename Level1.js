@@ -12,7 +12,6 @@ EnemyMojito = function(index, game, x, y) {
   }, 2000, "Linear", true, 0, 100, true)
 }
 
-var enemy1
 
 Game.Level1 = function(game){}
 
@@ -22,8 +21,10 @@ var layer
 var player
 var controls = {}
 var playerSpeed = 2
-var jumpTimer = 0
+var enemy1
 
+var shootTime = 0
+var bullets
 
 Game.Level1.prototype = {
   create: function() {
@@ -53,9 +54,6 @@ Game.Level1.prototype = {
 
 
     player = this.add.sprite(100, 150, "player")
-    // enemy = this.add.sprite(300, 150, "Mojito")
-    // enemy = this.add.sprite(800, 150, "Margarita")
-
     player.anchor.setTo(0.5, 0.5)
 
     // player.animations.add("idle", [0,1], 1, true)
@@ -73,10 +71,26 @@ Game.Level1.prototype = {
       right: this.input.keyboard.addKey(Phaser.Keyboard.D),
       left: this.input.keyboard.addKey(Phaser.Keyboard.A),
       up: this.input.keyboard.addKey(Phaser.Keyboard.W),
-      down: this.input.keyboard.addKey(Phaser.Keyboard.S)
+      down: this.input.keyboard.addKey(Phaser.Keyboard.S),
+      shoot: this.input.keyboard.addKey(Phaser.Keyboard.UP)
     }
 
     enemy1 = new EnemyMojito(0, this.game, player.x + 400, player.y)
+
+    bullets = this.add.group()
+
+    bullets.enableBody = true
+    bullets.physicsBodyType = Phaser.Physics.ARCADE
+    bullets.createMultiple(50, "bullets")
+
+    bullets.setAll("anchor.x", 0.5)
+    bullets.setAll("anchor.y", 0.5)
+
+    bullets.setAll("scale.x", 0.3)
+    bullets.setAll("scale.y", 0.3)
+
+    bullets.setAll("outOfBoundsKill", true)
+    bullets.setAll("checkWorldBounds", true)
 
   },
 
@@ -118,9 +132,17 @@ Game.Level1.prototype = {
       player.body.velocity.y += playerSpeed
     }
 
+    if(controls.shoot.isDown){
+      this.shootBullet()
+    }
+
     if(checkOverlap(player, enemy1.enemyMojito)) {
       this.resetPlayer()
 
+    }
+
+    if(checkOverlap(bullets, enemy1.enemyMojito)) {
+      enemy1.enemyMojito.kill()
     }
 
     // if (this.cursor.up.isDown) {
@@ -143,8 +165,20 @@ Game.Level1.prototype = {
 
        this.state.start("Level2")
 
-     }
+     },
 
+     shootBullet: function() {
+       if(this.time.now > shootTime){
+         bullet = bullets.getFirstExists(false)
+          if(bullet) {
+            bullet.reset(player.x,player.y)
+
+            bullet.body.velocity.y = -600
+
+            shootTime = this.time.now + 100
+          }
+       }
+     }
 }
 
 function checkOverlap(spriteA, spriteB) {
