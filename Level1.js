@@ -13,9 +13,9 @@ Game.Level1.prototype = {
   create: function() {
     this.stage.backgroundColor = "#00ffff"
 
-    this.background = this.game.add.tileSprite( 0, 0, 10240, 10240, "background")
+    this.background = this.game.add.tileSprite( 0, 0, 102400, 10240, "background2")
 
-    //  this.physics.arcade.gravity.y = 1400
+     this.physics.arcade.gravity.y = 1000
 
     //  this.world.enableBody = true
 
@@ -27,14 +27,19 @@ Game.Level1.prototype = {
 
     layer.resizeWorld()
 
-    map.setCollisionBetween(0,0)
+    map.setCollisionBetween(0,60)
 
-    player = this.add.sprite(100, 550, "player")
+    map.setTileIndexCallback(78, this.resetPlayer, this)
+
+    map.setTileIndexCallback(10, this.resetPlayer, this)
+
+
+    player = this.add.sprite(100, 150, "player")
     player.anchor.setTo(0.5, 0.5)
 
-    player.animations.add("idle", [0,1], 1, true)
-    player.animations.add("jump", [2], 1, true)
-    player.animations.add("run", [3,4,5,6,7,8], 7, true)
+    // player.animations.add("idle", [0,1], 1, true)
+    // player.animations.add("jump", [2], 1, true)
+    // player.animations.add("run", [3,4,5,6,7,8], 7, true)
 
     this.physics.arcade.enable(player)
     this.camera.follow(player)
@@ -101,5 +106,8 @@ Game.Level1.prototype = {
     // }
      },
 
+     resetPlayer: function() {
+       player.reset(100, 500)
+     }
 
 }

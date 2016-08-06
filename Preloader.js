@@ -18,13 +18,15 @@ Game.Preloader.prototype = {
 
     //load assets
 
-    this.load.tilemap("map", "assets/catSpace.csv")
+    this.load.tilemap("map", "assets/catKirby.csv")
 
     this.load.image("background", "assets/space-08.jpg")
 
-    this.load.image("tileset", "assets/exampleTiles.png")
+    this.load.image("background2", "assets/coolSpace.jpg")
 
-    this.load.spritesheet("player", "assets/nyanCatty.png", 142 ,87)
+    this.load.image("tileset", "assets/kirbyTiles.png")
+
+    this.load.spritesheet("player", "assets/CaptainKitty.png", 130 ,87)
 
 
   },
