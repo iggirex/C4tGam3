@@ -20,7 +20,7 @@ var layer
 
 var player
 var controls = {}
-var playerSpeed = 2
+var playerSpeed = 100
 var enemy1
 
 var shootTime = 0
@@ -75,7 +75,10 @@ Game.Level1.prototype = {
       left: this.input.keyboard.addKey(Phaser.Keyboard.A),
       up: this.input.keyboard.addKey(Phaser.Keyboard.W),
       down: this.input.keyboard.addKey(Phaser.Keyboard.S),
-      shoot: this.input.keyboard.addKey(Phaser.Keyboard.UP)
+      shootup: this.input.keyboard.addKey(Phaser.Keyboard.UP),
+      shootright: this.input.keyboard.addKey(Phaser.Keyboard.RIGHT),
+      shootdown: this.input.keyboard.addKey(Phaser.Keyboard.DOWN),
+      shootleft: this.input.keyboard.addKey(Phaser.Keyboard.LEFT)
     }
 
     enemy1 = new EnemyMojito(0, this.game, player.x + 1000, player.y)
@@ -95,8 +98,8 @@ Game.Level1.prototype = {
     bullets2.setAll("anchor.x", 0.5)
     bullets2.setAll("anchor.y", 0.5)
 
-    bullets.setAll("scale.x", 0.3)
-    bullets.setAll("scale.y", 0.3)
+    // bullets.setAll("scale.x", 0.3)
+    // bullets.setAll("scale.y", 0.3)
     // bullets2.setAll("scale.x", 0.6)
     // bullets2.setAll("scale.y", 0.6)
 
@@ -147,8 +150,20 @@ Game.Level1.prototype = {
       player.body.velocity.y += playerSpeed
     }
 
-    if(controls.shoot.isDown){
-      this.shootBullet()
+    if(controls.shootup.isDown){
+      this.shootBulletUp()
+    }
+
+    if(controls.shootright.isDown){
+      this.shootBulletRight()
+    }
+
+    if(controls.shootleft.isDown){
+      this.shootBulletLeft()
+    }
+
+    if(controls.shootdown.isDown){
+      this.shootBulletDown()
     }
 
     if(checkOverlap(player, enemy1.enemyMojito)) {
@@ -189,13 +204,52 @@ Game.Level1.prototype = {
 
      },
 
-     shootBullet: function() {
+     shootBulletUp: function() {
        if(this.time.now > shootTime){
          bullet = bullets.getFirstExists(false)
           if(bullet) {
             bullet.reset(player.x,player.y)
 
-            bullet.body.velocity.y = -600
+            bullet.body.velocity.y = -400
+
+            shootTime = this.time.now + 100
+          }
+        }
+     },
+
+     shootBulletRight: function() {
+       if(this.time.now > shootTime){
+         bullet = bullets.getFirstExists(false)
+          if(bullet) {
+            bullet.reset(player.x,player.y)
+
+            bullet.body.velocity.x = 400
+
+            shootTime = this.time.now + 100
+          }
+        }
+     },
+
+     shootBulletLeft: function() {
+       if(this.time.now > shootTime){
+         bullet = bullets.getFirstExists(false)
+          if(bullet) {
+            bullet.reset(player.x,player.y)
+
+            bullet.body.velocity.x = -400
+
+            shootTime = this.time.now + 100
+          }
+        }
+     },
+
+     shootBulletDown: function() {
+       if(this.time.now > shootTime){
+         bullet = bullets.getFirstExists(false)
+          if(bullet) {
+            bullet.reset(player.x,player.y)
+
+            bullet.body.velocity.y = 400
 
             shootTime = this.time.now + 100
           }

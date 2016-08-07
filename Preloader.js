@@ -36,7 +36,7 @@ Game.Preloader.prototype = {
 
     this.load.image("bullets", "assets/weezyBullet.png")
 
-    this.load.image("bullets2", "assets/1-2-rickross2.png")
+    this.load.image("bullets2", "assets/1-2-rickross.png")
 
 
   },
