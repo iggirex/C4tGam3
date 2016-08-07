@@ -28,7 +28,7 @@ Game.Preloader.prototype = {
 
     this.load.image("tileset", "assets/kirbyTiles.png")
 
-    this.load.spritesheet("player", "assets/CaptainKitty.png", 130 ,87)
+    this.load.spritesheet("player", "assets/CaptainKitty.png", 130 ,85)
 
     this.load.spritesheet("Mojito", "assets/enemyMojito2.png")
 
@@ -36,7 +36,7 @@ Game.Preloader.prototype = {
 
     this.load.image("bullets", "assets/weezyBullet.png")
 
-
+    this.load.image("bullets2", "assets/1-2-rickross2.png")
 
 
   },

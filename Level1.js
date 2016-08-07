@@ -25,6 +25,9 @@ var enemy1
 
 var shootTime = 0
 var bullets
+var bullets2
+var shootTime2 = 0
+
 
 Game.Level1.prototype = {
   create: function() {
@@ -75,22 +78,32 @@ Game.Level1.prototype = {
       shoot: this.input.keyboard.addKey(Phaser.Keyboard.UP)
     }
 
-    enemy1 = new EnemyMojito(0, this.game, player.x + 400, player.y)
+    enemy1 = new EnemyMojito(0, this.game, player.x + 1000, player.y)
 
     bullets = this.add.group()
+    bullets2 = this.add.group()
 
     bullets.enableBody = true
     bullets.physicsBodyType = Phaser.Physics.ARCADE
     bullets.createMultiple(50, "bullets")
+    bullets2.enableBody = true
+    bullets2.physicsBodyType = Phaser.Physics.ARCADE
+    bullets2.createMultiple(50, "bullets2")
 
     bullets.setAll("anchor.x", 0.5)
     bullets.setAll("anchor.y", 0.5)
+    bullets2.setAll("anchor.x", 0.5)
+    bullets2.setAll("anchor.y", 0.5)
 
     bullets.setAll("scale.x", 0.3)
     bullets.setAll("scale.y", 0.3)
+    // bullets2.setAll("scale.x", 0.6)
+    // bullets2.setAll("scale.y", 0.6)
 
     bullets.setAll("outOfBoundsKill", true)
     bullets.setAll("checkWorldBounds", true)
+    bullets2.setAll("checkWorldBounds", true)
+    bullets2.setAll("checkWorldBounds", true)
 
   },
 
@@ -102,7 +115,9 @@ Game.Level1.prototype = {
     // this.player.body.velocity.x = 0
 
     this.physics.arcade.collide(player,layer)
-
+    if(this.physics.arcade.collide(player, bullets2)){
+      this.resetPlayer()
+    }
     // player.body.velocity.x = 0
 
     if(controls.up.isDown) {
@@ -145,6 +160,13 @@ Game.Level1.prototype = {
       enemy1.enemyMojito.kill()
     }
 
+    // if(this.game.physics.arcade.collide(bullets2, player, this.resetPlayer(), null, this))
+
+    if(this.time.now > shootTime2) {
+      this.enemyShoot()
+    }
+
+
     // if (this.cursor.up.isDown) {
     //   this.player.body.velocity.y -= speed;
     // } else if (this.cursor.down.isDown) {
@@ -158,7 +180,7 @@ Game.Level1.prototype = {
      },
 
      resetPlayer: function() {
-       player.reset(100, 500)
+       player.reset(100, 100)
      },
 
      nextLevel: function() {
@@ -177,7 +199,20 @@ Game.Level1.prototype = {
 
             shootTime = this.time.now + 100
           }
-       }
+        }
+     },
+
+     enemyShoot: function() {
+       if(enemy1.enemyMojito.alive){
+         bullet = bullets2.getFirstExists(false)
+          if(bullet) {
+            bullet.reset(enemy1.enemyMojito.x, enemy1.enemyMojito.y)
+
+            bullet.body.velocity.x = -100
+
+            shootTime2 = this.time.now + 2000
+          }
+          }
      }
 }
 
