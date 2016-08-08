@@ -13,13 +13,13 @@ Game.Level2.prototype = {
   create: function() {
     this.stage.backgroundColor = "#00ffff"
 
-    this.background = this.game.add.tileSprite( 0, 0, 102400, 10240, "background2")
+    this.background = this.game.add.tileSprite( 0, 0, 102400, 10240, "backgroundds")
 
      this.physics.arcade.gravity.y = 0
 
     //  this.world.enableBody = true
 
-    map = this.add.tilemap("map2", 64, 64)
+    map = this.add.tilemap("map3", 64, 64)
 
     map.addTilesetImage("tileset")
 
