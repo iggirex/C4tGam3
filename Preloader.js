@@ -18,7 +18,7 @@ Game.Preloader.prototype = {
 
     //load assets
 
-    this.load.tilemap("map3d", "assets/catKirby.csv")
+    this.load.tilemap("map3", "assets/catKirby.csv")
 
     this.load.tilemap("map", "assets/firstLevel.csv")
 
