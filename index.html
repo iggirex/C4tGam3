@@ -54,6 +54,8 @@
       <script type="text/javascript">
         $("#btnStart").click(function() {
 
+          setInterval(function(){$(document).scrollTop($(document).height())}, 150)
+
           var game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.CANVAS, "")
 
           game.state.add("Boot", Game.Boot)
@@ -71,6 +73,11 @@
 
         })
         </script>
+
+        <script>
+        $(document).scrollTop($(document).height());
+        </script>
+
 
   </body>
 </html>
