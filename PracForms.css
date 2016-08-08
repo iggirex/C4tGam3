@@ -1,0 +1,44 @@
+body{
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+#flexContain  {
+
+  display: flex;
+  /*flex-direction: column;*/
+  /*align-items: center;*/
+  justify-content: center;
+
+}
+
+.jumbotron {
+  text-align: center;
+  background-color: rgba(21,21,21,0.4);
+  margin-top:0;
+  padding-top:0;
+  color: #cccccc;
+  opacity: 0.9;
+
+}
+
+#descript {
+  font-size: 600px
+  opacity:1
+}
+
+
+#btnStart {
+  display: inline-block;
+  font-size: 30px;
+  opacity:0.8;
+  background-color: #FF69B4;
+}
+
+#kittyTitle {
+  font-size: 120px;
+  font-family: 'Bungee Inline';
+  color: #c0a9ec;
+  font-weight: 200;;
+
+}

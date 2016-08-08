@@ -69,7 +69,7 @@ Game.Level1.prototype = {
 
     map.setCollisionBetween(0,60)
 
-    map.setTileIndexCallback(78, this.goLevelDos, this)
+    // map.setTileIndexCallback(78, this.goLevelDos, this)
 
     map.setTileIndexCallback(10, this.nextLevel, this)  // blue one
 
