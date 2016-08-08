@@ -12,6 +12,20 @@ EnemyMojito = function(index, game, x, y) {
   }, 2000, "Linear", true, 0, 100, true)
 }
 
+EnemyMarg = function(index, game, x, y) {
+
+  this.enemyMarg = game.add.sprite(x, y, "Margarita")
+  this.enemyMarg.anchor.setTo(0.5, 0.5)
+  this.enemyMarg.name = index.toString()
+  game.physics.enable(this.enemyMarg, Phaser.Physics.ARCADE)
+  this.enemyMarg.body.immovable = true
+  this.enemyMarg.body.collideWorldBounds = true
+
+  this.enemyMargTween = game.add.tween(this.enemyMarg).to({
+    y: this.enemyMarg.x + 100
+  }, 3000, "Linear", true, 0, 100, true)
+}
+
 
 Game.Level1 = function(game){}
 
@@ -20,13 +34,19 @@ var layer
 
 var player
 var controls = {}
-var playerSpeed = 100
+// var playerSpeed = 0
 var enemy1
+var enemy2
+var enemy3
+var enemyM
 
 var shootTime = 0
 var bullets
 var bullets2
 var shootTime2 = 0
+var shootTime3 = 0
+var shootTime4 = 0
+var shootTime5 = 0
 
 
 Game.Level1.prototype = {
@@ -82,6 +102,9 @@ Game.Level1.prototype = {
     }
 
     enemy1 = new EnemyMojito(0, this.game, player.x + 1000, player.y)
+    enemy2 = new EnemyMojito(1, this.game, player.x + 2000, player.y + 500)
+    enemy3 = new EnemyMojito(2, this.game, player.x + 3000, player.y + 700)
+    enemyM = new EnemyMarg(3, this.game, player.x + 2500, player.y)
 
     bullets = this.add.group()
     bullets2 = this.add.group()
@@ -124,29 +147,24 @@ Game.Level1.prototype = {
     // player.body.velocity.x = 0
 
     if(controls.up.isDown) {
-      player.animations.play("jump")
+      // player.animations.play("jump")
       player.body.velocity.y -= playerSpeed
     }
 
     if(controls.right.isDown) {
-      player.animations.play("run")
+      // player.animations.play("run")
       player.scale.setTo(1,1)
       player.body.velocity.x += playerSpeed
     }
 
     if(controls.left.isDown) {
-      player.animations.play("run")
+      // player.animations.play("run")
       player.scale.setTo(-1,1)
       player.body.velocity.x -= playerSpeed
     }
 
-    // if(controls.up.isDown && (player.body.onFloor() || player.body.touching.down) && this.time.now > jumpTimer) {
-    //   player.body.velocity.y = -600
-    //   jumpTimer = this.time.now + 750
-    // }
-    //
     if(controls.down.isDown) {
-      player.animations.play("jump")
+      // player.animations.play("jump")
       player.body.velocity.y += playerSpeed
     }
 
@@ -180,6 +198,19 @@ Game.Level1.prototype = {
     if(this.time.now > shootTime2) {
       this.enemyShoot()
     }
+
+    if(this.time.now > shootTime3) {
+      this.enemyShoot2()
+    }
+
+    if(this.time.now > shootTime4) {
+      this.enemyShoot3()
+    }
+
+    // if(this.time.now > shootTime5) {
+    //   this.enemyShootM()
+    // }
+
 
 
     // if (this.cursor.up.isDown) {
@@ -262,12 +293,51 @@ Game.Level1.prototype = {
           if(bullet) {
             bullet.reset(enemy1.enemyMojito.x, enemy1.enemyMojito.y)
 
-            bullet.body.velocity.x = -100
+            bullet.body.velocity.x = -300
 
             shootTime2 = this.time.now + 2000
           }
+        }
+     },
+
+     enemyShoot2: function() {
+       if(enemy2.enemyMojito.alive){
+         bullet = bullets2.getFirstExists(false)
+          if(bullet) {
+            bullet.reset(enemy2.enemyMojito.x, enemy2.enemyMojito.y)
+
+            bullet.body.velocity.x = -300
+
+            shootTime3 = this.time.now + 2000
           }
-     }
+          }
+     },
+
+     enemyShoot3: function() {
+       if(enemy3.enemyMojito.alive){
+         bullet = bullets2.getFirstExists(false)
+          if(bullet) {
+            bullet.reset(enemy3.enemyMojito.x, enemy3.enemyMojito.y)
+
+            bullet.body.velocity.x = -300
+
+            shootTime4 = this.time.now + 2000
+          }
+          }
+     },
+
+    //  enemyShootM: function() {
+    //    if(enemyM.enemyMarg.alive){
+    //      bullet = bullets2.getFirstExists(false)
+    //       if(bullet) {
+    //         bullet.reset(enemy.enemyMarg.x, enemy.enemyMarg.y)
+     //
+    //         bullet.body.velocity.x = -300
+     //
+    //         shootTime5 = this.time.now + 2000
+    //       }
+    //       }
+    //  }
 }
 
 function checkOverlap(spriteA, spriteB) {
