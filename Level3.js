@@ -51,14 +51,14 @@ youDied = function() {
 }
 
 
-Game.Level1 = function(game){}
+Game.Level3 = function(game){}
 
 var map
 var layer
 
 var player
 var controls = {}
-var playerSpeed = 0
+// var playerSpeed = 0
 var enemy1
 var enemy2
 var enemy3
@@ -73,7 +73,7 @@ var shootTime4 = 0
 var lives = 9;
 
 
-Game.Level1.prototype = {
+Game.Level3.prototype = {
   create: function() {
     this.stage.backgroundColor = "#00ffff"
 
@@ -85,33 +85,26 @@ Game.Level1.prototype = {
 
     //  this.world.enableBody = true
 
-    map = this.add.tilemap("map", 64, 64)
+    map = this.add.tilemap("map4", 64, 64)
 
-    map.addTilesetImage("tileset")
+    map.addTilesetImage("tileset2")
 
     layer = map.createLayer(0)
 
     layer.resizeWorld()
 
-    map.setCollisionBetween(0,60)
+    map.setCollisionBetween(0,80)
 
-    // map.setTileIndexCallback(78, this.goLevelDos, this)
-
-    map.setTileIndexCallback(10, this.nextLevel, this)  // blue one
+    map.setTileIndexCallback(0, this.nextLevel, this)  // blue one
 
     // map.setTileLocationCallback(4, 60, 20, 20, goLevelDos)
 
 
     player = this.add.sprite(100, 150, "player")
     player.anchor.setTo(0.5, 0.5)
-
     taco = this.add.sprite(800, 500, "taco")
     taco.animations.add("tacoSpin", [0,1,2,3,4,5,6], 1, true)
     taco.animations.play("tacoSpin", 5, true)
-
-    // taco2 = this.add.sprite(player.x+100, player.y, "taco")
-    // taco2.animations.add("tacoSpin", [0,1,2,3,4,5,6], 1, true)
-    // taco2.animations.play("tacoSpin", 5, true)
 
     this.score = 0
 
@@ -143,13 +136,6 @@ Game.Level1.prototype = {
     enemyM = new EnemyMarg(3, this.game, player.x + 2500, player.y)
 
     taco1 = new Taco(0, this.game, player.x + 2000, player.y + 800)
-    taco2 = new Taco(1, this.game, player.x + 2400, player.y)
-    taco3 = new Taco(1, this.game, player.x + 1700, player.y + 1000)
-    taco4 = new Taco(1, this.game, player.x + 700, player.y - 30)
-    taco5 = new Taco(1, this.game, player.x + 1100, player.y + 400)
-    taco6 = new Taco(1, this.game, player.x + 2500, player.y + 100)
-
-
 
     bullets = this.add.group()
     bullets2 = this.add.group()
@@ -189,17 +175,12 @@ Game.Level1.prototype = {
     this.physics.arcade.collide(player,layer)
     if(this.physics.arcade.collide(player, bullets2)){
       youDied()
-      this.state.start("Level1")
+      this.state.start("Level3")
     }
 
     this.physics.arcade.collide(player,layer)
     if(this.physics.arcade.collide(player, taco)){
       this.collectTaco()
-    }
-
-    this.physics.arcade.collide(player,layer)
-    if(this.physics.arcade.collide(player, taco2)){
-      this.collectTaco2()
     }
 
     if(controls.up.isDown) {
@@ -240,57 +221,27 @@ Game.Level1.prototype = {
     if(checkOverlap(player, enemy1.enemyMojito)) {
       if(enemy1.enemyMojito.alive){
         youDied()
-        this.state.start("Level1")
+        this.state.start("Level3")
       }
     }
 
     if(checkOverlap(player, enemy2.enemyMojito)) {
       if(enemy2.enemyMojito.alive){
         youDied()
-        this.state.start("Level1")
+        this.state.start("Level3")
       }
     }
 
     if(checkOverlap(player, enemy3.enemyMojito)) {
       if(enemy3.enemyMojito.alive){
         youDied()
-        this.state.start("Level1")
+        this.state.start("Level3")
       }
     }
 
     if(taco1.taco.alive && checkOverlap(player, taco1.taco)) {
       this.score += 500
       taco1.taco.kill()
-      this.scoreText.text = 'Score: ' + this.score
-    }
-
-    if(taco2.taco.alive && checkOverlap(player, taco2.taco)) {
-      this.score += 500
-      taco2.taco.kill()
-      this.scoreText.text = 'Score: ' + this.score
-    }
-
-    if(taco3.taco.alive && checkOverlap(player, taco3.taco)) {
-      this.score += 500
-      taco3.taco.kill()
-      this.scoreText.text = 'Score: ' + this.score
-    }
-
-    if(taco4.taco.alive && checkOverlap(player, taco4.taco)) {
-      this.score += 500
-      taco4.taco.kill()
-      this.scoreText.text = 'Score: ' + this.score
-    }
-
-    if(taco5.taco.alive && checkOverlap(player, taco5.taco)) {
-      this.score += 500
-      taco5.taco.kill()
-      this.scoreText.text = 'Score: ' + this.score
-    }
-
-    if(taco6.taco.alive && checkOverlap(player, taco6.taco)) {
-      this.score += 500
-      taco6.taco.kill()
       this.scoreText.text = 'Score: ' + this.score
     }
 
@@ -346,15 +297,17 @@ Game.Level1.prototype = {
        this.taco.kill()
      },
 
-     collectTaco2: function() {
-       this.taco.kill()
-     },
-
      nextLevel: function() {
 
-       this.state.start("Level22")
+       this.state.start("Level4")
 
      },
+
+     //CAHNGE LEVELS HERE
+
+
+
+
 
      shootBulletUp: function() {
        if(this.time.now > shootTime){

@@ -18,7 +18,7 @@ Game.Preloader.prototype = {
 
     //load assets
 
-    this.load.tilemap("map3", "assets/catKirby.csv")
+    this.load.tilemap("secondMap", "assets/catKirby.csv")
 
     this.load.tilemap("map", "assets/firstLevel.csv")
 
@@ -43,6 +43,15 @@ Game.Preloader.prototype = {
     this.load.image("bullets2", "assets/1-2-rickross.png")
 
     this.load.bitmapFont("minecraftia", "/assets/minecraftia.png", "assets/minecraftia.xml")
+
+    this.load.tilemap("map4", "/assets/kirbyCastle.csv")
+
+    this.load.image("tileset2", "assets/kirbyCastleTiles.png")
+
+    this.load.image("lavaTiles", "assets/lavaDonkey.png")
+
+    this.load.spritesheet("mapLava", "assets/lavaTestDonkey.csv")
+
 
 
   },
