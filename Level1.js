@@ -105,7 +105,7 @@ Game.Level1.prototype = {
     player = this.add.sprite(100, 150, "player")
     player.anchor.setTo(0.5, 0.5)
 
-    taco = this.add.sprite(800, 500, "taco")
+    taco = this.add.sprite(5800, 5500, "taco")
     taco.animations.add("tacoSpin", [0,1,2,3,4,5,6], 1, true)
     taco.animations.play("tacoSpin", 5, true)
 

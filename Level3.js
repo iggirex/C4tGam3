@@ -102,7 +102,7 @@ Game.Level3.prototype = {
 
     player = this.add.sprite(100, 150, "player")
     player.anchor.setTo(0.5, 0.5)
-    taco = this.add.sprite(800, 500, "taco")
+    taco = this.add.sprite(9800, 9500, "taco")
     taco.animations.add("tacoSpin", [0,1,2,3,4,5,6], 1, true)
     taco.animations.play("tacoSpin", 5, true)
 
@@ -135,7 +135,17 @@ Game.Level3.prototype = {
     enemy3 = new EnemyMojito(2, this.game, player.x + 3000, player.y + 700)
     enemyM = new EnemyMarg(3, this.game, player.x + 2500, player.y)
 
-    taco1 = new Taco(0, this.game, player.x + 2000, player.y + 800)
+    taco1 = new Taco(0, this.game, player.x + 2700, player.y + 200)
+    taco2 = new Taco(0, this.game, player.x + 300, player.y + 400)
+    taco3 = new Taco(0, this.game, player.x + 2300, player.y + 250)
+    taco4 = new Taco(0, this.game, player.x + 2100, player.y)
+    taco5 = new Taco(0, this.game, player.x + 2100, player.y + 800)
+    taco6 = new Taco(0, this.game, player.x + 2200, player.y + 700)
+    taco7 = new Taco(0, this.game, player.x + 1100, player.y)
+    taco8 = new Taco(0, this.game, player.x + 2000, player.y + 800)
+    taco9 = new Taco(0, this.game, player.x + 2600, player.y)
+    taco10 = new Taco(0, this.game, player.x + 2500, player.y + 1300)
+    taco12 = new Taco(0, this.game, player.x + 500, player.y + 1100)
 
     bullets = this.add.group()
     bullets2 = this.add.group()
@@ -242,6 +252,72 @@ Game.Level3.prototype = {
     if(taco1.taco.alive && checkOverlap(player, taco1.taco)) {
       this.score += 500
       taco1.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco2.taco.alive && checkOverlap(player, taco2.taco)) {
+      this.score += 500
+      taco2.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco3.taco.alive && checkOverlap(player, taco3.taco)) {
+      this.score += 500
+      taco3.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco4.taco.alive && checkOverlap(player, taco4.taco)) {
+      this.score += 500
+      taco4.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco5.taco.alive && checkOverlap(player, taco5.taco)) {
+      this.score += 500
+      taco5.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco6.taco.alive && checkOverlap(player, taco6.taco)) {
+      this.score += 500
+      taco6.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco7.taco.alive && checkOverlap(player, taco7.taco)) {
+      this.score += 500
+      taco7.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco8.taco.alive && checkOverlap(player, taco8.taco)) {
+      this.score += 500
+      taco8.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco9.taco.alive && checkOverlap(player, taco9.taco)) {
+      this.score += 500
+      taco9.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco10.taco.alive && checkOverlap(player, taco10.taco)) {
+      this.score += 500
+      taco10.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    // if(taco11.taco.alive && checkOverlap(player, taco11.taco)) {
+    //   this.score += 500
+    //   taco11.taco.kill()
+    //   this.scoreText.text = 'Score: ' + this.score
+    // }
+
+    if(taco12.taco.alive && checkOverlap(player, taco12.taco)) {
+      this.score += 500
+      taco12.taco.kill()
       this.scoreText.text = 'Score: ' + this.score
     }
 
