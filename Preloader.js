@@ -42,6 +42,8 @@ Game.Preloader.prototype = {
 
     this.load.image("bullets2", "assets/1-2-rickross.png")
 
+    this.load.bitmapFont("minecraftia", "/assets/minecraftia.png", "assets/minecraftia.xml")
+
 
   },
 

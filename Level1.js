@@ -48,6 +48,7 @@ Game.Level1 = function(game){}
 
 var map
 var layer
+var lives = 9
 
 var player
 var controls = {}
@@ -96,6 +97,8 @@ Game.Level1.prototype = {
     taco = this.add.sprite(800, 500, "taco")
     taco.animations.add("tacoSpin", [0,1,2,3,4,5,6], 1, true)
     taco.animations.play("tacoSpin", 5, true)
+
+    this.score = 0
 
     // player.animations.add("idle", [0,1], 1, true)
     // player.animations.add("jump", [2], 1, true)
@@ -150,6 +153,12 @@ Game.Level1.prototype = {
     bullets.setAll("checkWorldBounds", true)
     bullets2.setAll("checkWorldBounds", true)
     bullets2.setAll("checkWorldBounds", true)
+
+    this.scoreText = this.game.add.bitmapText(10,10, 'minecraftia', 'Score: 0', 50)
+    this.scoreText.fixedToCamera = true
+
+    this.livesText = this.game.add.bitmapText(380,10, 'minecraftia', 'Lives: 0', 50)
+    this.livesText.fixedToCamera = true
 
   },
 
@@ -223,12 +232,14 @@ Game.Level1.prototype = {
 
     if(checkOverlap(player, enemy3.enemyMojito)) {
       if(enemy3.enemyMojito.alive){
-      this.state.start("Level1")
+      player.kill()
       }
     }
 
-    if(checkOverlap(player, taco1.taco)) {
+    if(taco1.taco.alive && checkOverlap(player, taco1.taco)) {
+      this.score += 500
       taco1.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
     }
 
     // if(checkOverlap(player, enemyM.enemyMarg)) {
