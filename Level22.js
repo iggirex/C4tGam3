@@ -182,7 +182,7 @@ Game.Level2.prototype = {
     this.scoreText = this.game.add.bitmapText(10,10, 'minecraftia', 'Score: 0', 50)
     this.scoreText.fixedToCamera = true
 
-    this.livesText = this.game.add.bitmapText(380,10, 'minecraftia', 'Lives: ' + lives, 50)
+    this.livesText = this.game.add.bitmapText(420,10, 'minecraftia', 'Lives: ' + lives, 50)
     this.livesText.fixedToCamera = true
 
   },
