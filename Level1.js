@@ -42,13 +42,19 @@ Taco = function(index, game, x, y) {
   //   y: this.enemyMojito.y + 100
   // }, 2000, "Linear", true, 0, 100, true)
 }
+var lives = 9;
+youDied = function() {
+  lives -= 1
+  // if(lives === 0) {
+  //   this.state.start("Level1")
+  // }
+}
 
 
 Game.Level1 = function(game){}
 
 var map
 var layer
-var lives = 9
 
 var player
 var controls = {}
@@ -64,6 +70,8 @@ var bullets2
 var shootTime2 = 0
 var shootTime3 = 0
 var shootTime4 = 0
+var lives = 9;
+
 
 Game.Level1.prototype = {
   create: function() {
@@ -72,6 +80,8 @@ Game.Level1.prototype = {
     this.background = this.game.add.tileSprite( 0, 0, 102400, 10240, "background")
 
      this.physics.arcade.gravity.y = 0
+
+     this.lives = 9
 
     //  this.world.enableBody = true
 
@@ -157,36 +167,29 @@ Game.Level1.prototype = {
     this.scoreText = this.game.add.bitmapText(10,10, 'minecraftia', 'Score: 0', 50)
     this.scoreText.fixedToCamera = true
 
-    this.livesText = this.game.add.bitmapText(380,10, 'minecraftia', 'Lives: 0', 50)
+    this.livesText = this.game.add.bitmapText(380,10, 'minecraftia', 'Lives: ' + lives, 50)
     this.livesText.fixedToCamera = true
 
   },
 
   update: function() {
 
-
-    // var speed = 250
-    // this.player.body.velocity.y = 0
-    // this.player.body.velocity.x = 0
-
     this.physics.arcade.collide(player,layer)
     if(this.physics.arcade.collide(player, bullets2)){
-      this.resetPlayer()
+      youDied()
+      this.state.start("Level1")
     }
 
     this.physics.arcade.collide(player,layer)
     if(this.physics.arcade.collide(player, taco)){
       this.collectTaco()
     }
-    // player.body.velocity.x = 0
 
     if(controls.up.isDown) {
-      // player.animations.play("jump")
       player.body.velocity.y -= playerSpeed
     }
 
     if(controls.right.isDown) {
-      // player.animations.play("run")
       player.scale.setTo(1,1)
       player.body.velocity.x += playerSpeed
     }
@@ -198,7 +201,6 @@ Game.Level1.prototype = {
     }
 
     if(controls.down.isDown) {
-      // player.animations.play("jump")
       player.body.velocity.y += playerSpeed
     }
 
@@ -220,19 +222,22 @@ Game.Level1.prototype = {
 
     if(checkOverlap(player, enemy1.enemyMojito)) {
       if(enemy1.enemyMojito.alive){
-      this.state.start("Level1")
+        youDied()
+        this.state.start("Level1")
       }
     }
 
     if(checkOverlap(player, enemy2.enemyMojito)) {
       if(enemy2.enemyMojito.alive){
+        youDied()
         this.state.start("Level1")
       }
     }
 
     if(checkOverlap(player, enemy3.enemyMojito)) {
       if(enemy3.enemyMojito.alive){
-      player.kill()
+        youDied()
+        this.state.start("Level1")
       }
     }
 
@@ -277,23 +282,14 @@ Game.Level1.prototype = {
       this.enemyShoot3()
     }
 
-    // if(this.time.now > shootTime5) {
-    //   this.enemyShootM()
-    // }
-
-
-
-    // if (this.cursor.up.isDown) {
-    //   this.player.body.velocity.y -= speed;
-    // } else if (this.cursor.down.isDown) {
-    //   this.player.body.velocity.y += speed
-    // }
-    // if (this.cursor.left.isDown) {
-    //   this.player.body.velocity.x -= speed
-    // } else if (this.cursor.right.isDown) {
-    //   this.player.body.velocity.x += speed
-    // }
      },
+
+    //  youDied : function() {
+    //    lives -= 1
+    //    if(lives === 0) {
+    //      this.state.start("Level1")
+    //    }
+    //  },
 
      resetPlayer: function() {
        player.reset(100, 100)
