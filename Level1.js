@@ -63,8 +63,6 @@ var bullets2
 var shootTime2 = 0
 var shootTime3 = 0
 var shootTime4 = 0
-var shootTime5 = 0
-
 
 Game.Level1.prototype = {
   create: function() {
@@ -212,15 +210,21 @@ Game.Level1.prototype = {
     }
 
     if(checkOverlap(player, enemy1.enemyMojito)) {
+      if(enemy1.enemyMojito.alive){
       this.state.start("Level1")
+      }
     }
 
     if(checkOverlap(player, enemy2.enemyMojito)) {
-      this.state.start("Level1")
+      if(enemy2.enemyMojito.alive){
+        this.state.start("Level1")
+      }
     }
 
     if(checkOverlap(player, enemy3.enemyMojito)) {
+      if(enemy3.enemyMojito.alive){
       this.state.start("Level1")
+      }
     }
 
     // if(checkOverlap(player, enemyM.enemyMarg)) {
