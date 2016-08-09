@@ -13,7 +13,7 @@ Game.Level2.prototype = {
   create: function() {
     this.stage.backgroundColor = "#00ffff"
 
-    this.background = this.game.add.tileSprite( 0, 0, 102400, 10240, "backgroundds")
+    this.background = this.game.add.tileSprite( 0, 0, 102400, 10240, "backgrounds")
 
      this.physics.arcade.gravity.y = 0
 

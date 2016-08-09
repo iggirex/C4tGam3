@@ -26,6 +26,23 @@ EnemyMarg = function(index, game, x, y) {
   }, 3000, "Linear", true, 0, 100, true)
 }
 
+Taco = function(index, game, x, y) {
+
+  this.taco = game.add.sprite(x, y, "taco")
+  this.taco.anchor.setTo(0.5, 0.5)
+  this.taco.name = index.toString()
+  game.physics.enable(this.taco, Phaser.Physics.ARCADE)
+  this.taco.body.immovable = true
+  this.taco.body.collideWorldBounds = true
+
+  this.taco.animations.add("tacoSpin", [0,1,2,3,4,5,6], 1, true)
+  this.taco.animations.play("tacoSpin", 5, true)
+
+  // this.enemyMojitoTween = game.add.tween(this.enemyMojito).to({
+  //   y: this.enemyMojito.y + 100
+  // }, 2000, "Linear", true, 0, 100, true)
+}
+
 
 Game.Level1 = function(game){}
 
@@ -78,6 +95,9 @@ Game.Level1.prototype = {
 
     player = this.add.sprite(100, 150, "player")
     player.anchor.setTo(0.5, 0.5)
+    taco = this.add.sprite(800, 500, "taco")
+    taco.animations.add("tacoSpin", [0,1,2,3,4,5,6], 1, true)
+    taco.animations.play("tacoSpin", 5, true)
 
     // player.animations.add("idle", [0,1], 1, true)
     // player.animations.add("jump", [2], 1, true)
@@ -106,15 +126,17 @@ Game.Level1.prototype = {
     enemy3 = new EnemyMojito(2, this.game, player.x + 3000, player.y + 700)
     enemyM = new EnemyMarg(3, this.game, player.x + 2500, player.y)
 
+    taco1 = new Taco(0, this.game, player.x + 2000, player.y + 800)
+
     bullets = this.add.group()
     bullets2 = this.add.group()
 
     bullets.enableBody = true
     bullets.physicsBodyType = Phaser.Physics.ARCADE
-    bullets.createMultiple(50, "bullets")
+    bullets.createMultiple(500, "bullets")
     bullets2.enableBody = true
     bullets2.physicsBodyType = Phaser.Physics.ARCADE
-    bullets2.createMultiple(50, "bullets2")
+    bullets2.createMultiple(500, "bullets2")
 
     bullets.setAll("anchor.x", 0.5)
     bullets.setAll("anchor.y", 0.5)
@@ -143,6 +165,11 @@ Game.Level1.prototype = {
     this.physics.arcade.collide(player,layer)
     if(this.physics.arcade.collide(player, bullets2)){
       this.resetPlayer()
+    }
+
+    this.physics.arcade.collide(player,layer)
+    if(this.physics.arcade.collide(player, taco)){
+      this.collectTaco()
     }
     // player.body.velocity.x = 0
 
@@ -185,13 +212,37 @@ Game.Level1.prototype = {
     }
 
     if(checkOverlap(player, enemy1.enemyMojito)) {
-      this.resetPlayer()
-
+      this.state.start("Level1")
     }
+
+    if(checkOverlap(player, enemy2.enemyMojito)) {
+      this.state.start("Level1")
+    }
+
+    if(checkOverlap(player, enemy3.enemyMojito)) {
+      this.state.start("Level1")
+    }
+
+    // if(checkOverlap(player, enemyM.enemyMarg)) {
+    //   this.resetPlayer()
+    // }
 
     if(checkOverlap(bullets, enemy1.enemyMojito)) {
       enemy1.enemyMojito.kill()
     }
+
+    if(checkOverlap(bullets, enemy2.enemyMojito)) {
+      enemy2.enemyMojito.kill()
+    }
+
+    if(checkOverlap(bullets, enemy3.enemyMojito)) {
+      enemy3.enemyMojito.kill()
+    }
+
+    if(checkOverlap(bullets, enemyM.enemyMarg)) {
+      enemyM.enemyMarg.kill()
+    }
+
 
     // if(this.game.physics.arcade.collide(bullets2, player, this.resetPlayer(), null, this))
 
@@ -227,6 +278,10 @@ Game.Level1.prototype = {
 
      resetPlayer: function() {
        player.reset(100, 100)
+     },
+
+     collectTaco: function() {
+       this.collectTaco()
      },
 
      nextLevel: function() {

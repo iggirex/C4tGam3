@@ -32,6 +32,8 @@ Game.Preloader.prototype = {
 
     this.load.spritesheet("player", "assets/CaptainKitty.png", 130 ,85)
 
+    this.load.spritesheet("taco", "assets/movingTaco.png", 70, 55, 6)
+
     this.load.spritesheet("Mojito", "assets/enemyMojito2.png")
 
     this.load.spritesheet("Margarita", "assets/enemyMargarita.png")
