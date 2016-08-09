@@ -227,6 +227,10 @@ Game.Level1.prototype = {
       }
     }
 
+    if(checkOverlap(player, taco1.taco)) {
+      taco1.taco.kill()
+    }
+
     // if(checkOverlap(player, enemyM.enemyMarg)) {
     //   this.resetPlayer()
     // }
@@ -285,7 +289,7 @@ Game.Level1.prototype = {
      },
 
      collectTaco: function() {
-       this.collectTaco()
+       this.taco.kill()
      },
 
      nextLevel: function() {
