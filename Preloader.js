@@ -18,7 +18,7 @@ Game.Preloader.prototype = {
 
     //load assets
 
-    this.load.tilemap("map3", "assets/catKirby.csv")
+    this.load.tilemap("secondMap", "assets/catKirby.csv")
 
     this.load.tilemap("map", "assets/firstLevel.csv")
 
@@ -32,6 +32,8 @@ Game.Preloader.prototype = {
 
     this.load.spritesheet("player", "assets/CaptainKitty.png", 130 ,85)
 
+    this.load.spritesheet("taco", "assets/movingTaco.png", 70, 55, 6)
+
     this.load.spritesheet("Mojito", "assets/enemyMojito2.png")
 
     this.load.spritesheet("Margarita", "assets/enemyMargarita.png")
@@ -39,6 +41,17 @@ Game.Preloader.prototype = {
     this.load.image("bullets", "assets/weezyBullet.png")
 
     this.load.image("bullets2", "assets/1-2-rickross.png")
+
+    this.load.bitmapFont("minecraftia", "/assets/minecraftia.png", "assets/minecraftia.xml")
+
+    this.load.tilemap("map4", "/assets/kirbyCastle.csv")
+
+    this.load.image("tileset2", "assets/kirbyCastleTiles.png")
+
+    this.load.image("lavaTiles", "assets/lavaDonkey.png")
+
+    this.load.spritesheet("mapLava", "assets/lavaTestDonkey.csv")
+
 
 
   },

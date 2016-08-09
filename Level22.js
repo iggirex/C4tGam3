@@ -51,14 +51,14 @@ youDied = function() {
 }
 
 
-Game.Level1 = function(game){}
+Game.Level2 = function(game){}
 
 var map
 var layer
 
 var player
 var controls = {}
-var playerSpeed = 0
+var playerSpeed = 50
 var enemy1
 var enemy2
 var enemy3
@@ -70,10 +70,16 @@ var bullets2
 var shootTime2 = 0
 var shootTime3 = 0
 var shootTime4 = 0
+var shootTime5 = 0
+var shootTime6 = 0
+var shootTime7 = 0
+var shootTime8 = 0
+var shootTime9 = 0
+var shootTime10 = 0
 var lives = 9;
 
 
-Game.Level1.prototype = {
+Game.Level2.prototype = {
   create: function() {
     this.stage.backgroundColor = "#00ffff"
 
@@ -85,9 +91,10 @@ Game.Level1.prototype = {
 
     //  this.world.enableBody = true
 
-    map = this.add.tilemap("map", 64, 64)
+    map = this.add.tilemap("secondMap", 64, 64)
 
     map.addTilesetImage("tileset")
+
 
     layer = map.createLayer(0)
 
@@ -104,14 +111,9 @@ Game.Level1.prototype = {
 
     player = this.add.sprite(100, 150, "player")
     player.anchor.setTo(0.5, 0.5)
-
-    taco = this.add.sprite(5800, 5500, "taco")
+    taco = this.add.sprite(9800, 9500, "taco")
     taco.animations.add("tacoSpin", [0,1,2,3,4,5,6], 1, true)
     taco.animations.play("tacoSpin", 5, true)
-
-    // taco2 = this.add.sprite(player.x+100, player.y, "taco")
-    // taco2.animations.add("tacoSpin", [0,1,2,3,4,5,6], 1, true)
-    // taco2.animations.play("tacoSpin", 5, true)
 
     this.score = 0
 
@@ -142,12 +144,32 @@ Game.Level1.prototype = {
     enemy3 = new EnemyMojito(2, this.game, player.x + 3000, player.y + 700)
     enemyM = new EnemyMarg(3, this.game, player.x + 2500, player.y)
 
+    enemy4 = new EnemyMojito(2, this.game, player.x + 3000, player.y + 1100)
+    enemy5 = new EnemyMojito(2, this.game, player.x + 3500, player.y + 1540)
+    enemy6 = new EnemyMojito(2, this.game, player.x + 1500, player.y + 1400)
+    enemy7 = new EnemyMojito(2, this.game, player.x + 300, player.y + 800)
+    enemy8 = new EnemyMojito(2, this.game, player.x + 300, player.y + 900)
+    enemy9 = new EnemyMojito(2, this.game, player.x + 500, player.y + 700)
+
+
     taco1 = new Taco(0, this.game, player.x + 2000, player.y + 800)
-    taco2 = new Taco(1, this.game, player.x + 2400, player.y)
-    taco3 = new Taco(1, this.game, player.x + 1700, player.y + 1000)
-    taco4 = new Taco(1, this.game, player.x + 700, player.y - 30)
-    taco5 = new Taco(1, this.game, player.x + 1100, player.y + 400)
-    taco6 = new Taco(1, this.game, player.x + 2500, player.y + 100)
+    taco2 = new Taco(0, this.game, player.x + 300, player.y + 1300)
+    taco3 = new Taco(0, this.game, player.x + 3000, player.y + 1200)
+    taco4 = new Taco(0, this.game, player.x + 2500, player.y)
+    taco5 = new Taco(0, this.game, player.x + 1500, player.y + 800)
+    taco6 = new Taco(0, this.game, player.x + 1300, player.y + 1700)
+    taco7 = new Taco(0, this.game, player.x + 3500, player.y)
+    taco8 = new Taco(0, this.game, player.x + 3500, player.y + 800)
+    taco9 = new Taco(0, this.game, player.x + 1600, player.y + 2000)
+    taco10 = new Taco(0, this.game, player.x + 2500, player.y + 2100)
+    taco12 = new Taco(0, this.game, player.x + 500, player.y + 1500)
+    taco13 = new Taco(0, this.game, player.x + 3500, player.y + 2100)
+    taco14 = new Taco(0, this.game, player.x + 3600, player.y + 2100)
+    taco15 = new Taco(0, this.game, player.x + 3500, player.y + 2200)
+    taco16 = new Taco(0, this.game, player.x + 3600, player.y + 2200)
+
+
+
 
 
 
@@ -188,18 +210,13 @@ Game.Level1.prototype = {
 
     this.physics.arcade.collide(player,layer)
     if(this.physics.arcade.collide(player, bullets2)){
-      youDied()
-      this.state.start("Level1")
+        youDied()
+      this.state.start("Level22")
     }
 
     this.physics.arcade.collide(player,layer)
     if(this.physics.arcade.collide(player, taco)){
       this.collectTaco()
-    }
-
-    this.physics.arcade.collide(player,layer)
-    if(this.physics.arcade.collide(player, taco2)){
-      this.collectTaco2()
     }
 
     if(controls.up.isDown) {
@@ -240,21 +257,21 @@ Game.Level1.prototype = {
     if(checkOverlap(player, enemy1.enemyMojito)) {
       if(enemy1.enemyMojito.alive){
         youDied()
-        this.state.start("Level1")
+        this.state.start("Level22")
       }
     }
 
     if(checkOverlap(player, enemy2.enemyMojito)) {
       if(enemy2.enemyMojito.alive){
         youDied()
-        this.state.start("Level1")
+        this.state.start("Level22")
       }
     }
 
     if(checkOverlap(player, enemy3.enemyMojito)) {
       if(enemy3.enemyMojito.alive){
         youDied()
-        this.state.start("Level1")
+        this.state.start("Level22")
       }
     }
 
@@ -294,6 +311,66 @@ Game.Level1.prototype = {
       this.scoreText.text = 'Score: ' + this.score
     }
 
+    if(taco7.taco.alive && checkOverlap(player, taco7.taco)) {
+      this.score += 500
+      taco7.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco8.taco.alive && checkOverlap(player, taco8.taco)) {
+      this.score += 500
+      taco8.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco9.taco.alive && checkOverlap(player, taco9.taco)) {
+      this.score += 500
+      taco9.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco10.taco.alive && checkOverlap(player, taco10.taco)) {
+      this.score += 500
+      taco10.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    // if(taco11.taco.alive && checkOverlap(player, taco11.taco)) {
+    //   this.score += 500
+    //   taco11.taco.kill()
+    //   this.scoreText.text = 'Score: ' + this.score
+    // }
+
+    if(taco12.taco.alive && checkOverlap(player, taco12.taco)) {
+      this.score += 500
+      taco12.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco13.taco.alive && checkOverlap(player, taco13.taco)) {
+      this.score += 500
+      taco13.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco14.taco.alive && checkOverlap(player, taco14.taco)) {
+      this.score += 500
+      taco14.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco15.taco.alive && checkOverlap(player, taco15.taco)) {
+      this.score += 500
+      taco15.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
+    if(taco16.taco.alive && checkOverlap(player, taco16.taco)) {
+      this.score += 500
+      taco16.taco.kill()
+      this.scoreText.text = 'Score: ' + this.score
+    }
+
     // if(checkOverlap(player, enemyM.enemyMarg)) {
     //   this.resetPlayer()
     // }
@@ -314,6 +391,30 @@ Game.Level1.prototype = {
       enemyM.enemyMarg.kill()
     }
 
+    if(checkOverlap(bullets, enemy4.enemyMojito)) {
+      enemy4.enemyMojito.kill()
+    }
+
+    if(checkOverlap(bullets, enemy5.enemyMojito)) {
+      enemy5.enemyMojito.kill()
+    }
+
+    if(checkOverlap(bullets, enemy6.enemyMojito)) {
+      enemy6.enemyMojito.kill()
+    }
+
+    if(checkOverlap(bullets, enemy7.enemyMojito)) {
+      enemy7.enemyMojito.kill()
+    }
+
+    if(checkOverlap(bullets, enemy8.enemyMojito)) {
+      enemy8.enemyMojito.kill()
+    }
+
+    if(checkOverlap(bullets, enemy9.enemyMojito)) {
+      enemy9.enemyMojito.kill()
+    }
+
 
     // if(this.game.physics.arcade.collide(bullets2, player, this.resetPlayer(), null, this))
 
@@ -327,6 +428,30 @@ Game.Level1.prototype = {
 
     if(this.time.now > shootTime4) {
       this.enemyShoot3()
+    }
+
+    if(this.time.now > shootTime5) {
+      this.enemyShoot4()
+    }
+
+    if(this.time.now > shootTime6) {
+      this.enemyShoot5()
+    }
+
+    if(this.time.now > shootTime7) {
+      this.enemyShoot6()
+    }
+
+    if(this.time.now > shootTime8) {
+      this.enemyShoot7()
+    }
+
+    if(this.time.now > shootTime9) {
+      this.enemyShoot8()
+    }
+
+    if(this.time.now > shootTime10) {
+      this.enemyShoot9()
     }
 
      },
@@ -346,13 +471,9 @@ Game.Level1.prototype = {
        this.taco.kill()
      },
 
-     collectTaco2: function() {
-       this.taco.kill()
-     },
-
      nextLevel: function() {
 
-       this.state.start("Level22")
+       this.state.start("Level3")
 
      },
 
@@ -443,6 +564,84 @@ Game.Level1.prototype = {
             bullet.body.velocity.x = -300
 
             shootTime4 = this.time.now + 2000
+          }
+          }
+     },
+
+     enemyShoot4: function() {
+       if(enemy4.enemyMojito.alive){
+         bullet = bullets2.getFirstExists(false)
+          if(bullet) {
+            bullet.reset(enemy4.enemyMojito.x, enemy4.enemyMojito.y)
+
+            bullet.body.velocity.x = -400
+
+            shootTime5 = this.time.now + 2000
+          }
+          }
+     },
+
+     enemyShoot5: function() {
+       if(enemy5.enemyMojito.alive){
+         bullet = bullets2.getFirstExists(false)
+          if(bullet) {
+            bullet.reset(enemy5.enemyMojito.x, enemy5.enemyMojito.y)
+
+            bullet.body.velocity.x = -900
+
+            shootTime6 = this.time.now + 2000
+          }
+          }
+     },
+
+     enemyShoot6: function() {
+       if(enemy6.enemyMojito.alive){
+         bullet = bullets2.getFirstExists(false)
+          if(bullet) {
+            bullet.reset(enemy6.enemyMojito.x, enemy6.enemyMojito.y)
+
+            bullet.body.velocity.x = -300
+
+            shootTime7 = this.time.now + 2000
+          }
+          }
+     },
+
+     enemyShoot7: function() {
+       if(enemy7.enemyMojito.alive){
+         bullet = bullets2.getFirstExists(false)
+          if(bullet) {
+            bullet.reset(enemy7.enemyMojito.x, enemy7.enemyMojito.y)
+
+            bullet.body.velocity.y = -300
+
+            shootTime8 = this.time.now + 2000
+          }
+          }
+     },
+
+     enemyShoot8: function() {
+       if(enemy8.enemyMojito.alive){
+         bullet = bullets2.getFirstExists(false)
+          if(bullet) {
+            bullet.reset(enemy8.enemyMojito.x, enemy8.enemyMojito.y)
+
+            bullet.body.velocity.x = -800
+
+            shootTime9 = this.time.now + 2000
+          }
+          }
+     },
+
+     enemyShoot9: function() {
+       if(enemy9.enemyMojito.alive){
+         bullet = bullets2.getFirstExists(false)
+          if(bullet) {
+            bullet.reset(enemy9.enemyMojito.x, enemy9.enemyMojito.y)
+
+            bullet.body.velocity.y = -300
+
+            shootTime10 = this.time.now + 2000
           }
           }
      },
